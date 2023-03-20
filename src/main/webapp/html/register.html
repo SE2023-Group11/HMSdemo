@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>注册患者</title>
+</head>
+
+<body>
+	<h1>欢迎您来！</h1>
+	<form>
+		<label for="patientID">患者ID:</label>
+		<input type="text" id="patientID" name="patientID"><br><br>
+		<label for="patientName">患者姓名:</label>
+		<input type="text" id="patientName" name="patientName"><br><br>
+		<button type="button" onclick="addPatient()">点击注册</button>
+	</form>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		function addPatient() {
+			var patientID = document.getElementById("patientID").value;
+			var patientName = document.getElementById("patientName").value;
+			var data = { "patientID": patientID, "patientName": patientName };
+
+			axios.post('/addPatient', data)
+				.then(function (response) {
+					console.log(response.data);
+				})
+				.catch(function (error) {
+					console.error(error);
+				});
+		}
+	</script>
+	<style>
+	</style>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>查询患者姓名</title>
+</head>
+
+<body>
+    <h1>请输入患者id用于查询数据</h1>
+    <div id="app">
+        <form>
+            <label for="patientID">ID:</label>
+            <input type="text" v-model="patientID"><br><br>
+            <button type="button" @click="showPatient()">点击查询</button>
+        </form>
+        <br>
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    patientID: '',
+                    patientName: ''
+                }
+            },
+            methods: {
+                showPatient() {
+                    axios.get('/showPatient', {
+                        params: {
+                            patientID: this.patientID
+                        }
+                    })
+
+
+                        .then(response => {
+                            this.patientName = response.data.patientName;
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+    </style>
+</body>
+
+</html>
