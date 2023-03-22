@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql:///hmsdemo?serverTimezone=UTC
+      username: root
+      password: 345210
