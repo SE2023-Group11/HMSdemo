@@ -7,21 +7,18 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-//@RestController
-@Controller
+@RestController
 public class PatientController {
     @Autowired
     private PatientService patientService;
 
     @GetMapping("/addPatient")
-    @ResponseBody
     public boolean addPatient(Patient patient) {
         System.out.println("add ...");
         System.out.println(patient);
         return patientService.addPatient(patient);
     }
     @GetMapping("/showPatient")
-    @ResponseBody
     public String showPatient(Integer pid) {
         System.out.println("show ...");
         Patient patient = patientService.getbyId(pid);
