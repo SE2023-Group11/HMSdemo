@@ -13,15 +13,19 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @RequestMapping(value = "/addPatient")
-    public boolean addPatient(@PathVariable Patient patient) {
+    @GetMapping("/addPatient")
+    @ResponseBody
+    public boolean addPatient(Patient patient) {
         System.out.println("add ...");
+        System.out.println(patient);
         return patientService.addPatient(patient);
     }
     @GetMapping("/showPatient")
-    public String showPatient(@PathVariable Integer pid) {
+    @ResponseBody
+    public String showPatient(Integer pid) {
         System.out.println("show ...");
         Patient patient = patientService.getbyId(pid);
+        System.out.println(patient.getPname());
         return patient.getPname();
     }
 }

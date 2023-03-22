@@ -13,7 +13,7 @@ public interface PatientDao {
     @Select("select * FROM patient")
     public List<Patient> getAll();
 
-    @Insert("insert into patient (pid,pname) values(#{pid},#{pname})")
+    @Insert("insert into patient (pname) values(#{pname})")
     public void addPatient(Patient patient);
 
     @Update("update patient set pname = #{pname} where pid = #{pid}")
