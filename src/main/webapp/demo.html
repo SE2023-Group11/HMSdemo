@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vue.js Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>注册患者</h1>
+      <div>
+        <label for="patient-id">患者 ID:</label>
+        <input type="text" id="patient-id" v-model="patientId" />
+      </div>
+      <div>
+        <label for="patient-name">患者姓名:</label>
+        <input type="text" id="patient-name" v-model="patientName" />
+      </div>
+      <button @click="registerPatient">注册</button>
+      <hr />
+      <h1>查询患者</h1>
+      <div>
+        <label for="search-id">患者 ID:</label>
+        <input type="text" id="search-id" v-model="searchId" />
+      </div>
+      <button @click="searchPatient">查询</button>
+      <p v-if="patientFound">患者姓名: {{ patientName }}</p>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          patientId: "",
+          patientName: "",
+          searchId: "",
+          patientFound: false,
+        },
+        methods: {
+          registerPatient: function () {
+            axios
+              .post("/addPatient", {
+                id: this.patientId,
+                name: this.patientName,
+              })
+              .then(function (response) {
+                console.log(response.data);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          },
+          searchPatient: function () {
+            axios
+              .get("/showPatient", {
+                params: {
+                  id: this.searchId,
+                },
+              })
+              .then(function (response) {
+                app.patientName = response.data;
+                app.patientFound = true;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
