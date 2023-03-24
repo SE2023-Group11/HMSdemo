@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let newVar = axios.create({
+            baseURL:'http://localhost:8080',
+            timeout:5000
+        });
+        newVar({
+            url:'/showPatient'
+        }, {params:{pid:2}}).then(res=>{
+            console.log(res)
+        })
+    </script>
+    
+</body>
+</html>
