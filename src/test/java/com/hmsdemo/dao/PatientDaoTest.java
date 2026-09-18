@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class PatientDaoTest {
     @Autowired
-    private PatientDao patientDao;
+    private Patie
     @Test
     public void patientDaoTest(){
         Patient patient = patientDao.getById(1);
